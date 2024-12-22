@@ -65,7 +65,7 @@ export const LocalStorage = {
       LocalStorage.getTodoItemsFromLocalStorage().then((todoItems) => {
         const updatedTodoItems = todoItems.map((item) => {
           if (item.id === todoId) {
-            return { ...item, priority }; // Обновляем приоритет
+            return { ...item, priority };
           }
           return item;
         });

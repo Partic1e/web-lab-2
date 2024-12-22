@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {TodoItemsContainer} from './TodoItemsContainer';
 import {NewTodoItem} from '../TodoItem/NewTodoItem';
 import {TodoItem} from '../TodoItem/TodoItem';
@@ -8,12 +8,18 @@ import {SortButton} from './components/SortButton';
 
 export const TodoItems = () => {
   const [searchValue, setSearchValue] = useState('');
-
+  const [displayedItems, setDisplayedItems] = useState([]);
   const {data: todoItems, isLoading} = useData();
 
   const { mutate: toggleTodoStatus } = useUpdateTodoItemStatus();
   const {mutate: deleteTodo} = useDeleteTodoItem();
   const { mutate: updatePriority } = useUpdateTodoItemPriority();
+
+  React.useEffect(() => {
+    if (todoItems) {
+      setDisplayedItems(todoItems);
+    }
+  }, [todoItems]);
 
   if (!todoItems || isLoading) {
     return (
@@ -24,7 +30,7 @@ export const TodoItems = () => {
   }
 
   // фильтрация элементов по трём первым введённым символам
-  const filteredBySearchItems = todoItems.filter((todoItem) => {
+  const filteredBySearchItems = displayedItems.filter((todoItem) => {
     if (searchValue.trim().length < 3) return true;
     const clearedTodoItemTitle = todoItem.title.trim().toLowerCase();
     const clearedSearchValue = searchValue.trim().toLowerCase();
@@ -51,7 +57,8 @@ export const TodoItems = () => {
 
   // Обработчик сортировки задач
   const handleSort = () => {
-    const sorted = [...filteredBySearchItems].sort((a, b) => a.priority - b.priority);
+    const sorted = [...displayedItems].sort((a, b) => a.priority - b.priority);
+    setDisplayedItems(sorted);
   };
 
   const todoItemsElements = filteredBySearchItems.map((item) => {
