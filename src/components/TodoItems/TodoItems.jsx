@@ -33,7 +33,7 @@ export const TodoItems = () => {
   const filteredBySearchItems = displayedItems.filter((todoItem) => {
     if (searchValue.trim().length < 3) return true;
     const clearedTodoItemTitle = todoItem.title.trim().toLowerCase();
-    const clearedSearchValue = searchValue.trim().toLowerCase();
+    const clearedSearchValue = searchValue.trim().replace(/\s+/g, '').toLowerCase();
     return clearedTodoItemTitle.includes(clearedSearchValue);
   });
 
