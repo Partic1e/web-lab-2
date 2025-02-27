@@ -34,56 +34,41 @@ export const useSaveNewTodoItem = () => {
   }
 }
 
-// реализовал удаление по такому же принципу как добавление
 export const useDeleteTodoItem = () => {
   const client = useQueryClient();
 
-  const {mutate, isPending, isSuccess} = useMutation({
+  const {mutate} = useMutation({
     mutationFn: (todoId) => LocalStorage.deleteTodoItemFromLocalStorage(todoId),
     onSuccess: () => {
       client.invalidateQueries(['todo']);
     },
   });
 
-  return {
-    mutate,
-    isPending,
-    isSuccess,
-  }
+  return mutate
 }
 
-// обновление статуса элемента
 export const useUpdateTodoItemStatus = () => {
   const client = useQueryClient();
 
-  const {mutate, isPending, isSuccess} = useMutation({
+  const {mutate} = useMutation({
     mutationFn: ({id, isDone}) => LocalStorage.updateTodoItemStatusInLocalStorage(id, isDone),
     onSuccess: () => {
       client.invalidateQueries(['todo']);
     },
   });
 
-  return {
-    mutate,
-    isPending,
-    isSuccess,
-  }
+  return mutate
 }
 
-// обновление приоритета задачи
 export const useUpdateTodoItemPriority = () => {
   const client = useQueryClient();
 
-  const { mutate, isPending, isSuccess } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: ({ todoId, priority }) => LocalStorage.updateTodoItemPriority(todoId, priority),
     onSuccess: () => {
-      client.invalidateQueries(['todo']); // Обновляем список задач
+      client.invalidateQueries(['todo']);
     },
   });
 
-  return {
-    mutate,
-    isPending,
-    isSuccess,
-  }
+  return mutate
 }

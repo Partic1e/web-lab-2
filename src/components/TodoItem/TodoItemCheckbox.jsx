@@ -28,7 +28,6 @@ export const CheckboxContainer = styled.span(props => {
 });
 
 
-// обновил чекбокс, чтобы по клику изменялось его состояние
 export const TodoItemCheckbox = ({ disabled, checked, onChange }) => {
   return <CheckboxContainer disabled={disabled} checked={checked} onClick={onChange} />;
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 
-// добавлен приоритет
 const PriorityButton = styled.button`
   width: 24px;
   height: 24px;

@@ -19,7 +19,7 @@ export const LocalStorage = {
         }
     
         resolve(data);
-      }, 500);
+      }, 100);
     })
   },
 

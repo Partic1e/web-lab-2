@@ -8,8 +8,7 @@ const checkedCss = css`
   color: #B5B5BA;
   text-decoration: line-through;
 `
-// теперь текст задачи переносится на новую строку, если он длинный
-// если слово не помещается в контейнер то оно переносится
+
 const Title = styled.span(props => {
   return `
     font-size: 15px;
@@ -33,14 +32,10 @@ const Delete = styled.span`
   cursor: pointer;
 `;
 
-// теперь элемент принимает id, а не key, так как key нужен для управления DOM
-// добавил обработчик на кнопку удаления
-// добавил изменение состояния при нажатии на чекбокс
-// добавил приоритет задачи и при создании присваивается 1
 export const TodoItem = ({id, title, checked, priority, onDelete, onToggle, onPriorityChange}) => {
 
   const handlePrioritySelect = (newPriority) => {
-    onPriorityChange(id, newPriority); // Вызываем обработчик изменения приоритета
+    onPriorityChange(id, newPriority);
   };
 
   return (

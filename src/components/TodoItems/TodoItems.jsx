@@ -29,7 +29,6 @@ export const TodoItems = () => {
     );
   }
 
-  // фильтрация элементов по трём первым введённым символам
   const filteredBySearchItems = displayedItems.filter((todoItem) => {
     if (searchValue.trim().length < 3) return true;
     const clearedTodoItemTitle = todoItem.title.trim().toLowerCase();
@@ -37,12 +36,10 @@ export const TodoItems = () => {
     return clearedTodoItemTitle.includes(clearedSearchValue);
   });
 
-  // обновление чекбокса задачи
   const handleToggleTodo = (id, isDone) => {
     toggleTodoStatus({ id, isDone });
   };
 
-  // удаление через confirm
   const handleDeleteTodo = (id) => {
     const isConfirmed = window.confirm('Вы уверены, что хотите удалить задачу?');
     if (isConfirmed) {
@@ -50,12 +47,10 @@ export const TodoItems = () => {
     }
   };
 
-  // обновление приоритета
   const handlePriorityChange = (id, newPriority) => {
     updatePriority({ todoId: id, priority: newPriority });
   };
 
-  // Обработчик сортировки задач
   const handleSort = () => {
     const sorted = [...displayedItems].sort((a, b) => a.priority - b.priority);
     setDisplayedItems(sorted);

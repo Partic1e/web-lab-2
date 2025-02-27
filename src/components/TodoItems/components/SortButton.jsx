@@ -15,7 +15,6 @@ const Button = styled.button`
   }
 `;
 
-// кнопка сортировки
 export const SortButton = ({ onSort }) => {
   return (
     <Button onClick={onSort}>
