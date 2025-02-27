@@ -4,11 +4,12 @@ import {NewTodoItem} from '../TodoItem/NewTodoItem';
 import {TodoItem} from '../TodoItem/TodoItem';
 import {useData, useDeleteTodoItem, useUpdateTodoItemStatus, useUpdateTodoItemPriority} from '../../data/hooks/useData';
 import {SearchInput} from './components/SearchInput';
-import {SortButton} from './components/SortButton';
+import {ResetSortButton, SortButton} from './components/SortButton';
 
 export const TodoItems = () => {
   const [searchValue, setSearchValue] = useState('');
   const [displayedItems, setDisplayedItems] = useState([]);
+  const [isSortedAsc, setIsSortedAsc] = useState(true);
   const {data: todoItems, isLoading} = useData();
 
   const { mutate: toggleTodoStatus } = useUpdateTodoItemStatus();
@@ -52,8 +53,16 @@ export const TodoItems = () => {
   };
 
   const handleSort = () => {
-    const sorted = [...displayedItems].sort((a, b) => a.priority - b.priority);
+    const sorted = [...displayedItems].sort((a, b) => (isSortedAsc ? a.priority - b.priority : b.priority - a.priority));
     setDisplayedItems(sorted);
+    setIsSortedAsc(!isSortedAsc);
+  };
+
+  const handleResetSort = () => {
+    if (todoItems) {
+      setDisplayedItems(todoItems);
+    }
+    setIsSortedAsc(true);
   };
 
   const todoItemsElements = filteredBySearchItems.map((item) => {
@@ -75,6 +84,7 @@ export const TodoItems = () => {
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)} />
       <SortButton onSort={handleSort} />
+      <ResetSortButton onReset={handleResetSort} />
       {todoItemsElements}
       <NewTodoItem />
     </TodoItemsContainer>

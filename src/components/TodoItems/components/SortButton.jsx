@@ -22,3 +22,7 @@ export const SortButton = ({ onSort }) => {
     </Button>
   );
 };
+
+export const ResetSortButton = ({ onReset }) => {
+  return <Button onClick={onReset}>Сбросить сортировку</Button>;
+};

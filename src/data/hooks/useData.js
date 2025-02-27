@@ -44,7 +44,7 @@ export const useDeleteTodoItem = () => {
     },
   });
 
-  return mutate
+  return {mutate}
 }
 
 export const useUpdateTodoItemStatus = () => {
@@ -57,7 +57,7 @@ export const useUpdateTodoItemStatus = () => {
     },
   });
 
-  return mutate
+  return {mutate}
 }
 
 export const useUpdateTodoItemPriority = () => {
@@ -70,5 +70,5 @@ export const useUpdateTodoItemPriority = () => {
     },
   });
 
-  return mutate
+  return {mutate}
 }
